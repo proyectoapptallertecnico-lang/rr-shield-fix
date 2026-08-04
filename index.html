@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR Shield Fix | Reparacion de moviles, tablets y ordenadores en Ocana (Toledo)</title>
+<meta name="description" content="Reparacion de moviles, tablets y ordenadores en Ocana, Dos Barrios, Noblejas y La Guardia (Toledo). Presupuesto gratis. Contacta por WhatsApp.">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a href="#inicio" class="brand">
+<img src="logo.png" alt="RR Shield Fix" class="brand-logo">
+<span class="brand-name">RR SHIELD <span class="accent-blue">FIX</span></span>
+</a>
+<nav class="main-nav" id="mainNav">
+<a href="#servicios">Servicios</a>
+<a href="#precios">Precios</a>
+<a href="#zona">Zona de servicio</a>
+<a href="#solicitar">Solicitar reparacion</a>
+<a href="#contacto">Contacto</a>
+</nav>
+<a class="btn btn-whatsapp" href="https://wa.me/34614784757?text=Hola%20RR%20Shield%20Fix%2C%20quiero%20un%20presupuesto" target="_blank" rel="noopener">WhatsApp</a>
+<button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
+</div>
+</header>
+
+<section id="inicio" class="hero">
+<div class="container hero-inner">
+<div class="hero-text">
+<h1>Reparamos tu movil, tablet u ordenador <span class="accent-green">rapido y sin sorpresas</span></h1>
+<p>Servicio tecnico en Ocana, Dos Barrios, Noblejas y La Guardia (Toledo). Diagnostico y presupuesto sin compromiso.</p>
+<div class="hero-actions">
+<a href="#solicitar" class="btn btn-primary">Solicitar presupuesto gratis</a>
+<a href="https://wa.me/34614784757" target="_blank" rel="noopener" class="btn btn-outline">Hablar por WhatsApp</a>
+</div>
+</div>
+<div class="hero-logo">
+<img src="logo.png" alt="RR Shield Fix">
+</div>
+</div>
+</section>
+
+<section id="servicios" class="section">
+<div class="container">
+<h2>Servicios</h2>
+<div class="cards">
+<div class="card">
+<h3>Moviles</h3>
+<p>Pantallas, baterias, conectores de carga, camaras y software.</p>
+</div>
+<div class="card">
+<h3>Tablets</h3>
+<p>Pantallas, baterias, botones y problemas de software.</p>
+</div>
+<div class="card">
+<h3>Ordenadores</h3>
+<p>Formateo, eliminacion de virus, cambio de disco o memoria y mantenimiento.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="precios" class="section section-alt">
+<div class="container">
+<h2>Precios orientativos</h2>
+<p class="section-note">Precios de referencia. El importe final se confirma siempre despues de revisar el dispositivo, sin compromiso.</p>
+<div class="price-grid">
+<div class="price-item"><span>Cambio de pantalla movil</span><strong>desde 45&euro;</strong></div>
+<div class="price-item"><span>Cambio de bateria movil</span><strong>desde 30&euro;</strong></div>
+<div class="price-item"><span>Reparacion de tablet</span><strong>desde 40&euro;</strong></div>
+<div class="price-item"><span>Diagnostico</span><strong>gratis</strong></div>
+<div class="price-item"><span>Formateo / optimizacion de ordenador</span><strong>desde 35&euro;</strong></div>
+<div class="price-item"><span>Eliminacion de virus</span><strong>desde 25&euro;</strong></div>
+</div>
+</div>
+</section>
+
+<section id="zona" class="section">
+<div class="container">
+<h2>Zona de servicio</h2>
+<p>Atendemos en estas localidades de Toledo:</p>
+<ul class="zone-list">
+<li>Ocana</li>
+<li>Dos Barrios</li>
+<li>Noblejas</li>
+<li>La Guardia</li>
+</ul>
+<p class="section-note">Eres de otra localidad cercana? Escribenos y te decimos si podemos ayudarte.</p>
+</div>
+</section>
+
+<section id="solicitar" class="section section-alt">
+<div class="container">
+<h2>Solicitar reparacion</h2>
+<p class="section-note">Cuentanos que le pasa a tu dispositivo y te enviamos un presupuesto gratis.</p>
+
+<form id="repairForm" class="wizard">
+<div class="steps-indicator" id="stepsIndicator"></div>
+
+<div class="step" data-step="1">
+<h3>Tus datos</h3>
+<label>Nombre *
+<input type="text" name="nombre" required>
+</label>
+<label>Telefono *
+<input type="tel" name="telefono" required pattern="[0-9+ ]{9,15}">
+</label>
+<label>Poblacion *
+<select name="poblacion" required>
+<option value="">Selecciona...</option>
+<option>Ocana</option>
+<option>Dos Barrios</option>
+<option>Noblejas</option>
+<option>La Guardia</option>
+<option>Otra</option>
+</select>
+</label>
+</div>
+
+<div class="step" data-step="2" hidden>
+<h3>Dispositivo</h3>
+<label>Tipo de dispositivo *
+<select name="tipoDispositivo" required>
+<option value="">Selecciona...</option>
+<option>Movil</option>
+<option>Tablet</option>
+<option>Ordenador</option>
+</select>
+</label>
+<label>Marca y modelo *
+<input type="text" name="modelo" placeholder="Ej: Xiaomi Redmi Note 12" required>
+</label>
+</div>
+
+<div class="step" data-step="3" hidden>
+<h3>Que le pasa?</h3>
+<label>Problema principal *
+<select name="problema" required>
+<option value="">Selecciona...</option>
+<option>Pantalla rota</option>
+<option>Bateria / no carga</option>
+<option>No enciende</option>
+<option>Virus / lentitud</option>
+<option>Se mojo</option>
+<option>Otro</option>
+</select>
+</label>
+<label>Detalles adicionales
+<textarea name="detalles" rows="4" placeholder="Cuentanos mas detalles..."></textarea>
+</label>
+</div>
+
+<div class="step" data-step="4" hidden>
+<h3>Metodo de entrega</h3>
+<label class="radio-option">
+<input type="radio" name="metodoEntrega" value="Taller" checked>
+Llevar al taller
+</label>
+<label class="radio-option">
+<input type="radio" name="metodoEntrega" value="Domicilio">
+Tecnico a domicilio (con cita previa)
+</label>
+<label class="radio-option">
+<input type="radio" name="metodoEntrega" value="Mensajeria">
+Envio por mensajeria
+</label>
+<div id="mensajeriaInfo" class="info-box" hidden>
+Embala bien el dispositivo. Te contactaremos para indicarte la direccion de envio y los siguientes pasos.
+</div>
+</div>
+
+<div class="step" data-step="5" hidden>
+<h3>Revisa y envia</h3>
+<div id="resumen" class="resumen"></div>
+</div>
+
+<div class="wizard-nav">
+<button type="button" id="prevBtn" class="btn btn-outline">Anterior</button>
+<button type="button" id="nextBtn" class="btn btn-primary">Siguiente</button>
+<button type="submit" id="submitBtn" class="btn btn-primary" hidden>Enviar solicitud</button>
+</div>
+<p id="formMsg" class="form-msg"></p>
+</form>
+</div>
+</section>
+
+<footer id="contacto" class="site-footer">
+<div class="container footer-inner">
+<div class="footer-brand">
+<img src="logo.png" alt="RR Shield Fix" class="footer-logo">
+<p>RR Shield Fix</p>
+</div>
+<div>
+<h4>Contacto</h4>
+<p><a href="tel:+34614784757">614 78 47 57</a></p>
+<p><a href="https://wa.me/34614784757" target="_blank" rel="noopener">WhatsApp</a></p>
+<p>Ocana, Dos Barrios, Noblejas y La Guardia (Toledo)</p>
+</div>
+</div>
+<p class="copy">&copy; <span id="year"></span> RR Shield Fix. Todos los derechos reservados.</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
