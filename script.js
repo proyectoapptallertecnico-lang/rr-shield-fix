@@ -18,6 +18,16 @@ const mainNav = document.getElementById("mainNav");
 navToggle.addEventListener("click", function () {
   mainNav.classList.toggle("open");
 });
+mainNav.querySelectorAll("a").forEach(function (link) {
+  link.addEventListener("click", function () {
+    mainNav.classList.remove("open");
+  });
+});
+document.addEventListener("click", function (e) {
+  if (mainNav.classList.contains("open") && !mainNav.contains(e.target) && e.target !== navToggle) {
+    mainNav.classList.remove("open");
+  }
+});
 
 // Wizard del formulario
 const form = document.getElementById("repairForm");
@@ -129,3 +139,23 @@ form.addEventListener("submit", async function (e) {
 });
 
 showStep(0);
+
+// Aparicion suave de tarjetas y bloques al hacer scroll
+const revealEls = document.querySelectorAll(".reveal");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (revealEls.length && "IntersectionObserver" in window && !prefersReducedMotion) {
+  const revealObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
+} else {
+  revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+}
