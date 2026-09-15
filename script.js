@@ -15,17 +15,21 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // Menu movil
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
+function setNavOpen(open) {
+  mainNav.classList.toggle("open", open);
+  navToggle.setAttribute("aria-expanded", String(open));
+}
 navToggle.addEventListener("click", function () {
-  mainNav.classList.toggle("open");
+  setNavOpen(!mainNav.classList.contains("open"));
 });
 mainNav.querySelectorAll("a").forEach(function (link) {
   link.addEventListener("click", function () {
-    mainNav.classList.remove("open");
+    setNavOpen(false);
   });
 });
 document.addEventListener("click", function (e) {
-  if (mainNav.classList.contains("open") && !mainNav.contains(e.target) && e.target !== navToggle) {
-    mainNav.classList.remove("open");
+  if (mainNav.classList.contains("open") && !mainNav.contains(e.target) && !navToggle.contains(e.target)) {
+    setNavOpen(false);
   }
 });
 
