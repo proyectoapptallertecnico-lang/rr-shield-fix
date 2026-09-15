@@ -1,14 +1,22 @@
 // Configuracion de Firebase (clave publica de cliente, protegida por reglas de Firestore)
-const firebaseConfig = {
-  apiKey: "AIzaSyDvqJyE6RNy6mGBFJ8p00jnXr0SGgvnxj4",
-  authDomain: "rr-shield-fix-f51e8.firebaseapp.com",
-  projectId: "rr-shield-fix-f51e8",
-  storageBucket: "rr-shield-fix-f51e8.firebasestorage.app",
-  messagingSenderId: "109491958301",
-  appId: "1:109491958301:web:1fe13e1e15e5fa3a710cf4"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Si Firebase no carga (bloqueador de anuncios, red, caida del servicio) el resto de la
+// pagina (menu, animaciones, formulario) debe seguir funcionando igual, asi que el fallo
+// se aisla aqui en vez de dejar que detenga la ejecucion del resto del script.
+let db = null;
+try {
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvqJyE6RNy6mGBFJ8p00jnXr0SGgvnxj4",
+    authDomain: "rr-shield-fix-f51e8.firebaseapp.com",
+    projectId: "rr-shield-fix-f51e8",
+    storageBucket: "rr-shield-fix-f51e8.firebasestorage.app",
+    messagingSenderId: "109491958301",
+    appId: "1:109491958301:web:1fe13e1e15e5fa3a710cf4"
+  };
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+} catch (err) {
+  console.error("No se pudo inicializar Firebase:", err);
+}
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -84,17 +92,26 @@ form.querySelectorAll("input[name=metodoEntrega]").forEach(function (r) {
   });
 });
 
+function resumenRow(label, value) {
+  const p = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = label + ":";
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode(" " + value));
+  return p;
+}
+
 function buildResumen() {
   const data = new FormData(form);
   const resumen = document.getElementById("resumen");
-  resumen.innerHTML =
-    "<p><strong>Nombre:</strong> " + data.get("nombre") + "</p>" +
-    "<p><strong>Telefono:</strong> " + data.get("telefono") + "</p>" +
-    "<p><strong>Poblacion:</strong> " + data.get("poblacion") + "</p>" +
-    "<p><strong>Dispositivo:</strong> " + data.get("tipoDispositivo") + " - " + data.get("modelo") + "</p>" +
-    "<p><strong>Problema:</strong> " + data.get("problema") + "</p>" +
-    "<p><strong>Detalles:</strong> " + (data.get("detalles") || "-") + "</p>" +
-    "<p><strong>Entrega:</strong> " + data.get("metodoEntrega") + "</p>";
+  resumen.innerHTML = "";
+  resumen.appendChild(resumenRow("Nombre", data.get("nombre")));
+  resumen.appendChild(resumenRow("Telefono", data.get("telefono")));
+  resumen.appendChild(resumenRow("Poblacion", data.get("poblacion")));
+  resumen.appendChild(resumenRow("Dispositivo", data.get("tipoDispositivo") + " - " + data.get("modelo")));
+  resumen.appendChild(resumenRow("Problema", data.get("problema")));
+  resumen.appendChild(resumenRow("Detalles", data.get("detalles") || "-"));
+  resumen.appendChild(resumenRow("Entrega", data.get("metodoEntrega")));
 }
 
 form.addEventListener("submit", async function (e) {
@@ -107,6 +124,7 @@ form.addEventListener("submit", async function (e) {
   const fechaISO = hoy.toISOString().slice(0, 10);
   const problemaCompleto = data.get("problema") + (data.get("detalles") ? (" - " + data.get("detalles")) : "");
   try {
+    if (!db) throw new Error("Firebase no esta disponible");
     await db.collection("reparaciones").add({
       cliente: data.get("nombre"),
       clienteNif: "",
