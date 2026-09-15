@@ -373,11 +373,21 @@ h1, h2, h3, h4 { color: var(--metal); margin-top: 0; }
   transition: border-color 180ms ease, transform 180ms ease;
 }
 .photo-placeholder:hover { border-color: rgba(47,140,255,0.4); transform: translateY(-2px); }
-.photo-placeholder-icon { width: 30px; height: 30px; }
+.photo-placeholder-icon { width: 34px; height: 34px; color: var(--blue); }
 
 .avatar-placeholder {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, rgba(47,140,255,0.14), var(--panel) 70%);
+}
+
+.illustration {
+  width: 76px;
+  height: 76px;
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* Gallery */
