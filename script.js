@@ -1,7 +1,7 @@
-// Configuracion de Firebase (clave publica de cliente, protegida por reglas de Firestore)
-// Si Firebase no carga (bloqueador de anuncios, red, caida del servicio) el resto de la
-// pagina (menu, animaciones, formulario) debe seguir funcionando igual, asi que el fallo
-// se aisla aqui en vez de dejar que detenga la ejecucion del resto del script.
+// Configuración de Firebase (clave pública de cliente, protegida por reglas de Firestore)
+// Si Firebase no carga (bloqueador de anuncios, red, caída del servicio) el resto de la
+// página (menú, animaciones, formulario) debe seguir funcionando igual, así que el fallo
+// se aísla aquí en vez de dejar que detenga la ejecución del resto del script.
 let db = null;
 try {
   const firebaseConfig = {
@@ -20,7 +20,7 @@ try {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Menu movil
+// Menú móvil
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
 function setNavOpen(open) {
@@ -106,8 +106,8 @@ function buildResumen() {
   const resumen = document.getElementById("resumen");
   resumen.innerHTML = "";
   resumen.appendChild(resumenRow("Nombre", data.get("nombre")));
-  resumen.appendChild(resumenRow("Telefono", data.get("telefono")));
-  resumen.appendChild(resumenRow("Poblacion", data.get("poblacion")));
+  resumen.appendChild(resumenRow("Teléfono", data.get("telefono")));
+  resumen.appendChild(resumenRow("Población", data.get("poblacion")));
   resumen.appendChild(resumenRow("Dispositivo", data.get("tipoDispositivo") + " - " + data.get("modelo")));
   resumen.appendChild(resumenRow("Problema", data.get("problema")));
   resumen.appendChild(resumenRow("Detalles", data.get("detalles") || "-"));
@@ -124,7 +124,7 @@ form.addEventListener("submit", async function (e) {
   const fechaISO = hoy.toISOString().slice(0, 10);
   const problemaCompleto = data.get("problema") + (data.get("detalles") ? (" - " + data.get("detalles")) : "");
   try {
-    if (!db) throw new Error("Firebase no esta disponible");
+    if (!db) throw new Error("Firebase no está disponible");
     await db.collection("reparaciones").add({
       cliente: data.get("nombre"),
       clienteNif: "",
@@ -145,14 +145,14 @@ form.addEventListener("submit", async function (e) {
       origen: "web-rrshieldfix.es",
       creado: firebase.firestore.FieldValue.serverTimestamp()
     });
-    formMsg.textContent = "Solicitud enviada. Te contactaremos pronto. Tambien puedes escribirnos por WhatsApp para ir mas rapido.";
+    formMsg.textContent = "Solicitud enviada. Te contactaremos pronto. También puedes escribirnos por WhatsApp para ir más rápido.";
     formMsg.className = "form-msg success";
     form.reset();
     currentStep = 0;
     showStep(0);
   } catch (err) {
     console.error(err);
-    formMsg.textContent = "Hubo un problema al enviar tu solicitud. Por favor, contactanos por WhatsApp.";
+    formMsg.textContent = "Hubo un problema al enviar tu solicitud. Por favor, contáctanos por WhatsApp.";
     formMsg.className = "form-msg error";
   } finally {
     submitBtn.disabled = false;
@@ -162,7 +162,7 @@ form.addEventListener("submit", async function (e) {
 
 showStep(0);
 
-// Aparicion suave de tarjetas y bloques al hacer scroll
+// Aparición suave de tarjetas y bloques al hacer scroll
 const revealEls = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (revealEls.length && "IntersectionObserver" in window && !prefersReducedMotion) {
