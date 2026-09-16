@@ -1,3 +1,6 @@
+// Vercel Web Analytics: define la cola antes de que cargue /_vercel/insights/script.js
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
 // Configuración de Firebase (clave pública de cliente, protegida por reglas de Firestore)
 // Si Firebase no carga (bloqueador de anuncios, red, caída del servicio) el resto de la
 // página (menú, animaciones, formulario) debe seguir funcionando igual, así que el fallo
