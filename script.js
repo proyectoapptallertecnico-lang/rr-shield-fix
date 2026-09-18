@@ -43,6 +43,12 @@ document.addEventListener("click", function (e) {
     setNavOpen(false);
   }
 });
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && mainNav.classList.contains("open")) {
+    setNavOpen(false);
+    navToggle.focus();
+  }
+});
 
 // Wizard del formulario
 const form = document.getElementById("repairForm");
@@ -53,11 +59,13 @@ const nextBtn = document.getElementById("nextBtn");
 const submitBtn = document.getElementById("submitBtn");
 const formMsg = document.getElementById("formMsg");
 const stepsIndicator = document.getElementById("stepsIndicator");
+const stepsStatus = document.getElementById("stepsStatus");
 
 function renderIndicator() {
   stepsIndicator.innerHTML = steps.map(function (_, i) {
     return "<span class=\"dot" + (i === currentStep ? " active" : "") + "\"></span>";
   }).join("");
+  stepsStatus.textContent = "Paso " + (currentStep + 1) + " de " + steps.length;
 }
 
 function showStep(i) {

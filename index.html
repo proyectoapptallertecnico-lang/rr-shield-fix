@@ -277,6 +277,7 @@ Hablar por WhatsApp
 
 <form id="repairForm" class="wizard reveal">
 <div class="steps-indicator" id="stepsIndicator"></div>
+<p id="stepsStatus" class="sr-only" aria-live="polite"></p>
 
 <div class="step" data-step="1">
 <h3>Tus datos</h3>
@@ -329,7 +330,8 @@ Hablar por WhatsApp
 </div>
 
 <div class="step" data-step="4" hidden>
-<h3>Método de entrega</h3>
+<fieldset class="step-fieldset">
+<legend>Método de entrega</legend>
 <label class="radio-option">
 <input type="radio" name="metodoEntrega" value="Taller" checked>
 Llevar al taller
@@ -345,6 +347,7 @@ Envío por mensajería
 <div id="mensajeriaInfo" class="info-box" hidden>
 Embala bien el dispositivo. Te contactaremos para indicarte la dirección de envío y los siguientes pasos.
 </div>
+</fieldset>
 </div>
 
 <div class="step" data-step="5" hidden>
