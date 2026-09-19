@@ -60,7 +60,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 body {
   margin: 0;
@@ -169,7 +169,8 @@ h1, h2, h3, h4 { color: var(--metal); margin-top: 0; }
 
 .main-nav { display: flex; gap: 18px; }
 .main-nav a { color: var(--metal-dim); font-weight: 600; font-size: 14.5px; transition: color 150ms ease; }
-.main-nav a:hover { color: var(--blue); }
+.main-nav a:hover,
+.main-nav a[aria-current="true"] { color: var(--blue); }
 
 .nav-toggle {
   display: none;
@@ -200,7 +201,7 @@ h1, h2, h3, h4 { color: var(--metal); margin-top: 0; }
 }
 .btn:active { transform: scale(0.97); }
 .btn-primary {
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  background: linear-gradient(135deg, #2b6cd9, var(--blue-dark));
   color: #fff;
   box-shadow: 0 6px 18px rgba(47,140,255,0.28);
 }

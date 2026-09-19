@@ -80,7 +80,7 @@ function showStep(i) {
 function validateStep(i) {
   const inputs = steps[i].querySelectorAll("input[required], select[required]");
   for (const inp of inputs) {
-    if (!inp.value) { inp.reportValidity(); return false; }
+    if (!inp.value.trim() || !inp.checkValidity()) { inp.reportValidity(); return false; }
   }
   return true;
 }
@@ -201,6 +201,30 @@ form.addEventListener("submit", async function (e) {
 });
 
 showStep(0);
+
+// Resalta en el menú la sección que se está viendo
+const navLinks = Array.from(mainNav.querySelectorAll("a[href^='#']"));
+const navTargets = navLinks
+  .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+  .filter(Boolean);
+if (navTargets.length && "IntersectionObserver" in window) {
+  const spy = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function (link) {
+          if (link.getAttribute("href") === "#" + entry.target.id) {
+            link.setAttribute("aria-current", "true");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  navTargets.forEach(function (t) { spy.observe(t); });
+}
 
 // Aparición suave de tarjetas y bloques al hacer scroll
 const revealEls = document.querySelectorAll(".reveal");

@@ -411,10 +411,10 @@ Hablar por WhatsApp
 <div class="step" data-step="1">
 <h3>Tus datos</h3>
 <label>Nombre *
-<input type="text" name="nombre" required>
+<input type="text" name="nombre" required maxlength="80" autocomplete="name">
 </label>
 <label>Teléfono *
-<input type="tel" name="telefono" required pattern="[0-9+ ]{9,15}">
+<input type="tel" name="telefono" required pattern="[0-9+ ]{9,15}" maxlength="15" inputmode="tel" autocomplete="tel" title="Teléfono de 9 a 15 dígitos, por ejemplo 612 345 678">
 </label>
 <label>Población *
 <select name="poblacion" required>
@@ -436,7 +436,7 @@ Hablar por WhatsApp
 </select>
 </label>
 <label>Marca y modelo *
-<input type="text" name="modelo" placeholder="Ej: Xiaomi Redmi Note 12" required>
+<input type="text" name="modelo" placeholder="Ej: Xiaomi Redmi Note 12" required maxlength="80" autocomplete="off">
 </label>
 </div>
 
@@ -454,7 +454,7 @@ Hablar por WhatsApp
 </select>
 </label>
 <label>Detalles adicionales
-<textarea name="detalles" rows="4" placeholder="Cuéntanos más detalles..."></textarea>
+<textarea name="detalles" rows="4" maxlength="500" placeholder="Cuéntanos más detalles..."></textarea>
 </label>
 </div>
 
