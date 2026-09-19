@@ -125,11 +125,38 @@ function buildResumen() {
   resumen.appendChild(resumenRow("Entrega", data.get("metodoEntrega")));
 }
 
+function whatsappButton(data) {
+  const lineas = [
+    "Hola RR Shield Fix, acabo de enviar una solicitud desde la web.",
+    "Nombre: " + data.get("nombre"),
+    "Dispositivo: " + data.get("tipoDispositivo") + " " + data.get("modelo"),
+    "Problema: " + data.get("problema") + (data.get("detalles") ? " - " + data.get("detalles") : ""),
+    "Entrega: " + data.get("metodoEntrega")
+  ];
+  const a = document.createElement("a");
+  a.className = "btn btn-whatsapp";
+  a.href = "https://wa.me/34614784757?text=" + encodeURIComponent(lineas.join("\n"));
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = "Enviar también por WhatsApp";
+  return a;
+}
+
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
   if (!validateStep(currentStep)) return;
+  // Campo trampa: solo lo rellenan los bots. Se simula el éxito sin guardar nada.
+  if (new FormData(form).get("website")) {
+    form.reset();
+    currentStep = 0;
+    showStep(0);
+    formMsg.textContent = "Solicitud enviada. Te contactaremos pronto.";
+    formMsg.className = "form-msg success";
+    return;
+  }
   submitBtn.disabled = true;
   submitBtn.textContent = "Enviando...";
+  formMsg.textContent = "";
   const data = new FormData(form);
   const hoy = new Date();
   const fechaISO = hoy.toISOString().slice(0, 10);
@@ -156,15 +183,17 @@ form.addEventListener("submit", async function (e) {
       origen: "web-rrshieldfix.es",
       creado: firebase.firestore.FieldValue.serverTimestamp()
     });
-    formMsg.textContent = "Solicitud enviada. Te contactaremos pronto. También puedes escribirnos por WhatsApp para ir más rápido.";
+    formMsg.textContent = "Solicitud enviada. Te contactaremos pronto. Para ir más rápido, también puedes enviarla por WhatsApp:";
     formMsg.className = "form-msg success";
+    formMsg.appendChild(whatsappButton(data));
     form.reset();
     currentStep = 0;
     showStep(0);
   } catch (err) {
     console.error(err);
-    formMsg.textContent = "Hubo un problema al enviar tu solicitud. Por favor, contáctanos por WhatsApp.";
+    formMsg.textContent = "Hubo un problema al enviar tu solicitud. Puedes enviarla directamente por WhatsApp:";
     formMsg.className = "form-msg error";
+    formMsg.appendChild(whatsappButton(data));
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Enviar solicitud";
